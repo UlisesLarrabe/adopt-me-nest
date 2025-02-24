@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UpdateAdoptionDto } from './dto/update-adoption.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -23,7 +23,7 @@ export class AdoptionsService {
       return { message: 'pet not found' };
     }
     if (pet.adopted === true) {
-      return { message: 'pet already adopted' };
+      throw new BadRequestException('Pet already adopted');
     }
     user.pets.push(pet._id);
     await this.userModel.findByIdAndUpdate(userId, { pets: user.pets });
