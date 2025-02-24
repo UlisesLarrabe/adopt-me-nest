@@ -17,10 +17,10 @@ export class AdoptionsService {
     const user = await this.userModel.findById(userId);
     const pet = await this.petModel.findById(petId);
     if (user === null) {
-      return { message: 'user not found' };
+      throw new BadRequestException('User not found');
     }
     if (pet === null) {
-      return { message: 'pet not found' };
+      throw new BadRequestException('Pet not found');
     }
     if (pet.adopted === true) {
       throw new BadRequestException('Pet already adopted');
