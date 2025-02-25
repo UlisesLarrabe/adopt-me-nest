@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { UpdatePetDto } from './dto/update-pet.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -24,7 +24,7 @@ export class PetsService {
   async findOne(id: string) {
     const pet = await this.petModel.findById(id);
     if (pet === null) {
-      return { message: 'User not found' };
+      throw new NotFoundException('Pet not found');
     }
 
     return pet;

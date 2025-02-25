@@ -55,4 +55,12 @@ export class UsersService {
     await this.userModel.findByIdAndDelete(id);
     return 'User has been removed';
   }
+
+  async findOneByEmail(email: string) {
+    const user = await this.userModel.findOne({ email });
+    if (user === null) {
+      return null;
+    }
+    return user;
+  }
 }
