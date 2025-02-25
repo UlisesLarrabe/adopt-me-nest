@@ -1,14 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Param } from '@nestjs/common';
 import { AdoptionsService } from './adoptions.service';
-import { UpdateAdoptionDto } from './dto/update-adoption.dto';
 
 @Controller('adoptions')
 export class AdoptionsController {
@@ -22,19 +13,6 @@ export class AdoptionsController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.adoptionsService.findOne(id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateAdoptionDto: UpdateAdoptionDto,
-  ) {
-    return this.adoptionsService.update(id, updateAdoptionDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.adoptionsService.remove(id);
   }
 
   @Post(':uid/:pid')

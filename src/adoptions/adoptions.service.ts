@@ -3,7 +3,6 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UpdateAdoptionDto } from './dto/update-adoption.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Adoption } from './entities/adoption.entity';
@@ -49,13 +48,5 @@ export class AdoptionsService {
       return { message: 'adoption not found' };
     }
     return adoption;
-  }
-
-  update(id: string, updateAdoptionDto: UpdateAdoptionDto) {
-    return `This action updates a #${id} adoption`;
-  }
-
-  remove(id: string) {
-    return `This action removes a #${id} adoption`;
   }
 }
