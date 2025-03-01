@@ -10,6 +10,8 @@ import { SessionsModule } from './sessions/sessions.module';
 
 @Module({
   imports: [
+    PetsModule,
+    UsersModule,
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRootAsync({
       inject: [ConfigService],
@@ -18,8 +20,7 @@ import { SessionsModule } from './sessions/sessions.module';
         uri: configService.get('MONGO_URL'),
       }),
     }),
-    UsersModule,
-    PetsModule,
+
     AdoptionsModule,
     SessionsModule,
   ],
