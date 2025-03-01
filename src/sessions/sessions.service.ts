@@ -15,20 +15,20 @@ export class SessionsService {
       createUserDto.email,
     );
     if (userExists) {
-      throw new UnauthorizedException('User already exists');
+      throw new UnauthorizedException('Email already in use');
     }
     const hashedPassword = await this.hashPassword(createUserDto.password);
     const newUser = await this.usersService.create({
       ...createUserDto,
       password: hashedPassword,
     });
-    return newUser;
+    return { message: 'User created', payload: newUser };
   }
 
   async login(loginDto: { email: string; password: string }) {
     const user = await this.usersService.findOneByEmail(loginDto.email);
     if (!user) {
-      throw new UnauthorizedException('Invalid email');
+      throw new UnauthorizedException('Invalid credentials');
     }
     await this.verifyPassword(loginDto.password, user.password);
     const token = this.jwtService.sign({ id: user._id });
@@ -42,7 +42,7 @@ export class SessionsService {
   private async verifyPassword(password: string, hashedPassword: string) {
     const passwordMatches = await bcrypt.compare(password, hashedPassword);
     if (!passwordMatches) {
-      throw new UnauthorizedException('Invalid password');
+      throw new UnauthorizedException('Invalid credentials');
     }
   }
 }
