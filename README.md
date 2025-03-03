@@ -27,13 +27,13 @@ To get started with the project, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/adopt-me-nestjs.git
+git clone https://github.com/uliseslarrabe/adopt-me-nest.git
 ```
 
 2. Navigate to the project directory:
 
 ```bash
-cd adopt-me-nestjs
+cd adopt-me-nest
 ```
 
 3. Install the dependencies:
